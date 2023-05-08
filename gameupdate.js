@@ -3,7 +3,7 @@ const teamOptions = [
     {value: "ATL", label: "Atlanta Braves"},
     {value: "BAL", label: "Baltimore Orioles"},
     {value: "BOS", label: "Boston Red Sox"},
-    {value: "CWS", label: "Chicago White Sox"},
+    {value: "CHW", label: "Chicago White Sox"},
     {value: "CHC", label: "Chicago Cubs"},
     {value: "CIN", label: "Cincinnati Reds"},
     {value: "CLE", label: "Cleveland Guardians"},
@@ -45,7 +45,7 @@ const teams = [
     new Team("Atlanta", "Braves", "ATL", "Truist Park", "Atlanta, GA"),
     new Team("Baltimore", "Orioles", "BAL", "Oriole Park at Camden Yards", "Baltimore, MD"),
     new Team("Boston", "Red Sox", "BOS", "Fenway Park", "Boston, MA"),
-    new Team("Chicago", "White Sox", "CWS", "Guaranteed Rate Field", "Chicago, IL"),
+    new Team("Chicago", "White Sox", "CHW", "Guaranteed Rate Field", "Chicago, IL"),
     new Team("Chicago", "Cubs", "CHC", "Wrigley Field", "Chicago, IL"),
     new Team("Cincinnati", "Reds", "CIN", "Great American Ball Park", "Cincinnati, OH"),
     new Team("Cleveland", "Guardians", "CLE", "Progressive Field", "Cleveland, OH"),
@@ -127,7 +127,36 @@ function generateLayout() {
     textBox.textContent += `[u][b]${homeTeam.city} ${homeTeam.nickname}:[/b][/u]\n`;
     textBox.textContent += `${document.getElementById("home-stats").value}\n\n`;
     textBox.textContent += `--\n\n`;
+    generateSimGames();
 
+}
+
+function generateSimGames() {
+    const textBox = document.getElementById("update-box");
+    for (let i = 0; i < 5; i++) {
+        const homeTeam = findTeam(
+            teams,
+            document.getElementById(`home-team-${i+1}`).value
+        );
+        const awayTeam = findTeam(
+            teams,
+            document.getElementById(`away-team-${i+1}`).value
+        );
+        textBox.textContent += `[img]https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${awayTeam.abbreviation}.png&scale=crop&cquality=40&location=origin&w=80&h=80[/img]`;
+        textBox.textContent += `@ [img]https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${homeTeam.abbreviation}.png&scale=crop&cquality=40&location=origin&w=80&h=80[/img][size=85]\n\n`;
+        textBox.textContent += `[B]${awayTeam.abbreviation}[/B] | [B]${document.getElementById(`away-runs-${i+1}`).value}[/B] |`;
+        textBox.textContent += ` ${document.getElementById(`away-hits-${i+1}`).value} | ${document.getElementById(`away-errors-${i+1}`).value}\n`;
+        textBox.textContent += `[B]${homeTeam.abbreviation}[/B] | [B]${document.getElementById(`home-runs-${i+1}`).value}[/B] |`;
+        textBox.textContent += ` ${document.getElementById(`home-hits-${i+1}`).value} | ${document.getElementById(`home-errors-${i+1}`).value}\n`;
+        textBox.textContent += `[b]W:[/b] ${document.getElementById(`win-${i+1}`).value}\n`;
+        textBox.textContent += `[b]L:[/b] ${document.getElementById(`loss-${i+1}`).value}\n`;
+        if (document.getElementById(`save-${i+1}`).value != '') {
+            textBox.textContent += `[b]S:[/b] ${document.getElementById(`save-${i+1}`).value}\n`;
+        };
+        textBox.textContent += `\n[b]${awayTeam.abbreviation} HR:[/b] ${document.getElementById(`away-hr-${i+1}`).value}\n`;
+        textBox.textContent += `[b]${homeTeam.abbreviation} HR:[/b] ${document.getElementById(`home-hr-${i+1}`).value}\n`;
+        textBox.textContent += '[/size]\n--\n\n';
+        }
 }
 
 function gameLayouts () {
