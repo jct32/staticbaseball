@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team Stats Form</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <form id="statsForm">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br><br>
+            <h2>Hitting Stats</h2>
+            <div id="hittingStats">
+            </div>
+            <br>
+            <h2>Pitching Stats</h2>
+            <div id="pitchingStats">
+            </div>
+        </form>
+    <br>
+    <button id="generate-btn">Generate Output</button>
+    <br>
+    <br>
+    <textarea rows="20" cols="80" id="output-text"></textarea>
+    <br>
+    <br>
+    <button id="copy-btn">Copy Text</button>
+    <script src="teamstats.js"></script>
+    </body>
+</html>
