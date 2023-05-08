@@ -130,10 +130,110 @@ function generateLayout() {
 
 }
 
+function gameLayouts () {
+    const form = document.getElementById("update-form");
+    for (let i = 0; i < 5; i++) {
+        const header = document.createElement("h2");
+        header.textContent = `Sim Game ${i + 1}`;
+        form.appendChild(header);
+        const awayLabel = document.createElement("label");
+        awayLabel.textContent = "Away Team ";
+        form.appendChild(awayLabel);
+        const awayTeam = document.createElement("select");
+        awayTeam.id = `away-team-${i+1}`;
+        createOptions(awayTeam, teamOptions);
+        form.appendChild(awayTeam);
+        const awayRuns = document.createElement("input");
+        awayRuns.type = "number";
+        awayRuns.id = `away-runs-${i+1}`;
+        awayRuns.placeholder = "Runs";
+        form.appendChild(awayRuns);
+        const awayHits = document.createElement("input");
+        awayHits.type = "number";
+        awayHits.id = `away-hits-${i+1}`;
+        awayHits.placeholder = "Hits";
+        form.appendChild(awayHits);
+        const awayErrors = document.createElement("input");
+        awayErrors.type = "number";
+        awayErrors.id = `away-errors-${i+1}`;
+        awayErrors.placeholder = "Errors";
+        form.appendChild(awayErrors);
+        form.appendChild(document.createElement("br"));
+        const homeLabel = document.createElement("label");
+        homeLabel.textContent = "Home Team ";
+        form.appendChild(homeLabel);
+        const homeTeam = document.createElement("select");
+        homeTeam.id = `home-team-${i+1}`;
+        createOptions(homeTeam, teamOptions);
+        form.appendChild(homeTeam);
+        const homeRuns = document.createElement("input");
+        homeRuns.type = "number";
+        homeRuns.id = `home-runs-${i+1}`;
+        homeRuns.placeholder = "Runs";
+        form.appendChild(homeRuns);
+        const homeHits = document.createElement("input");
+        homeHits.type = "number";
+        homeHits.id = `home-hits-${i+1}`;
+        homeHits.placeholder = "Hits";
+        form.appendChild(homeHits);
+        const homeErrors = document.createElement("input");
+        homeErrors.type = "number";
+        homeErrors.id = `home-errors-${i+1}`;
+        homeErrors.placeholder = "Errors";
+        form.appendChild(homeErrors);
+        form.appendChild(document.createElement("br"));
+        const winLabel = document.createElement("label");
+        winLabel.textContent = "W: ";
+        form.appendChild(winLabel);
+        const win = document.createElement("input");
+        win.id = `win-${i+1}`;
+        form.appendChild(win);
+        form.appendChild(document.createElement("br"));
+        const lossLabel = document.createElement("label");
+        lossLabel.textContent = "L: ";
+        form.appendChild(lossLabel);
+        const loss = document.createElement("input");
+        loss.id = `loss-${i+1}`;
+        form.appendChild(loss);
+        form.appendChild(document.createElement("br"));
+        const saveLabel = document.createElement("label");
+        saveLabel.textContent = "S: ";
+        form.appendChild(saveLabel);
+        const save = document.createElement("input");
+        save.id = `save-${i+1}`;
+        form.appendChild(save);
+        form.appendChild(document.createElement("br"));
+        const awayHRLabel = document.createElement("label");
+        awayHRLabel.textContent = "Away HR: ";
+        form.appendChild(awayHRLabel);
+        const awayHR = document.createElement("input");
+        awayHR.id = `away-hr-${i+1}`;
+        form.appendChild(awayHR);
+        form.appendChild(document.createElement("br"));
+        const homeyHRLabel = document.createElement("label");
+        homeyHRLabel.textContent = "Home HR: ";
+        form.appendChild(homeyHRLabel);
+        const homeHR = document.createElement("input");
+        homeHR.id = `home-hr-${i+1}`;
+        form.appendChild(homeHR);
+    }
+}
+
+function copyLayout() {
+    const updateBox = document.getElementById("update-box");
+    updateBox.select();
+    document.execCommand("copy");
+}
+
 createOptions(document.getElementById("away-team"), teamOptions);
 createOptions(document.getElementById("home-team"), teamOptions);
+gameLayouts();
 
 const updateBtn = document.getElementById("generate-btn");
 updateBtn.addEventListener("click", () => {
     generateLayout();
-})
+});
+const copyBtn = document.getElementById("copy-btn");
+copyBtn.addEventListener("click", () => {
+    copyLayout();
+});

@@ -75,7 +75,6 @@ function generateHeader() {
 function copyText() {
   outputTextArea.select();
   document.execCommand("copy");
-  document.body.removeChild(input);
 }
 
 generateBtn.addEventListener("click", generateText);
