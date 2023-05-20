@@ -23,7 +23,7 @@ const teamOptions = [
     {value: "PIT", label: "Pittsburgh Pirates"},
     {value: "SD", label: "San Diego Padres"},
     {value: "SF", label: "San Francisco Giants"},
-    {value: "SEA", label: "Seattle Mriners"},
+    {value: "SEA", label: "Seattle Mariners"},
     {value: "STL", label: "St. Louis Cardinals"},
     {value: "TB", label: "Tampa Bay Rays"},
     {value: "TEX", label: "Texas Rangers"},
