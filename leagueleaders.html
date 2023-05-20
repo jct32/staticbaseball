@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team Stats Form</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <form id="leagueleadersform">
+            <input type="radio" id="american-league" name="league" value="al">
+            <label for="american-league">American League</label>
+            <input type="radio" id="national-league" name="league" value="nl">
+            <label for="national-league">National League</label>
+            <br><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br>
+        </form>
+    <br>
+    <button id="generate-btn">Generate Output</button>
+    <br>
+    <br>
+    <textarea rows="20" cols="80" id="output-text"></textarea>
+    <br>
+    <br>
+    <button id="copy-btn">Copy Text</button>
+    <script src="leagueleaders.js"></script>
+    </body>
+</html>
