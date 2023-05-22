@@ -1,34 +1,34 @@
 const teamOptions = [
-    {value: "ARI", label: "Arizona Diamondbacks"},
-    {value: "ATL", label: "Atlanta Braves"},
-    {value: "BAL", label: "Baltimore Orioles"},
-    {value: "BOS", label: "Boston Red Sox"},
-    {value: "CHW", label: "Chicago White Sox"},
-    {value: "CHC", label: "Chicago Cubs"},
-    {value: "CIN", label: "Cincinnati Reds"},
-    {value: "CLE", label: "Cleveland Guardians"},
-    {value: "COL", label: "Colorado Rockies"},
-    {value: "DET", label: "Detroit Tigers"},
-    {value: "HOU", label: "Houston Astros"},
-    {value: "KC", label: "Kansas City Royals"},
-    {value: "LAA", label: "Los Angeles Angels"},
-    {value: "LAD", label: "Los Angeles Dodgers"},
-    {value: "MIA", label: "Miami Marlins"},
-    {value: "MIL", label: "Milwaukee Brewers"},
-    {value: "MIN", label: "Minnesota Twins"},
-    {value: "NYY", label: "New York Yankees"},
-    {value: "NYM", label: "New York Mets"},
-    {value: "OAK", label: "Oakland Athletics"},
-    {value: "PHL", label: "Philadelphia Phillies"},
-    {value: "PIT", label: "Pittsburgh Pirates"},
-    {value: "SD", label: "San Diego Padres"},
-    {value: "SF", label: "San Francisco Giants"},
-    {value: "SEA", label: "Seattle Mriners"},
-    {value: "STL", label: "St. Louis Cardinals"},
-    {value: "TB", label: "Tampa Bay Rays"},
-    {value: "TEX", label: "Texas Rangers"},
-    {value: "TOR", label: "Toronto Blue Jays"},
-    {value: "WAS", label: "Washington Nationals"}
+    {value: "Arizona Diamondbacks", label: "Arizona Diamondbacks"},
+    {value: "Atlanta Braves", label: "Atlanta Braves"},
+    {value: "Baltimore Orioles", label: "Baltimore Orioles"},
+    {value: "Boston Red Sox", label: "Boston Red Sox"},
+    {value: "Chicago White Sox", label: "Chicago White Sox"},
+    {value: "Chicago Cubs", label: "Chicago Cubs"},
+    {value: "Cincinnati Reds", label: "Cincinnati Reds"},
+    {value: "Cleveland Guardians", label: "Cleveland Guardians"},
+    {value: "Colorado Rockies", label: "Colorado Rockies"},
+    {value: "Detroit Tigers", label: "Detroit Tigers"},
+    {value: "Houston Astros", label: "Houston Astros"},
+    {value: "Houston Astros", label: "Houston Astros"},
+    {value: "Los Angeles Angels", label: "Los Angeles Angels"},
+    {value: "Los Angeles Dodgers", label: "Los Angeles Dodgers"},
+    {value: "Miami Marlins", label: "Miami Marlins"},
+    {value: "Milwaukee Brewers", label: "Milwaukee Brewers"},
+    {value: "Minnesota Twins", label: "Minnesota Twins"},
+    {value: "New York Yankees", label: "New York Yankees"},
+    {value: "New York Mets", label: "New York Mets"},
+    {value: "Oakland Athletics", label: "Oakland Athletics"},
+    {value: "Philadelphia Phillies", label: "Philadelphia Phillies"},
+    {value: "Pittsburgh Pirates", label: "Pittsburgh Pirates"},
+    {value: "San Diego Padres", label: "San Diego Padres"},
+    {value: "San Francisco Giants", label: "San Francisco Giants"},
+    {value: "Seattle Mariners", label: "Seattle Mariners"},
+    {value: "St. Louis Cardinals", label: "St. Louis Cardinals"},
+    {value: "Tampa Bay Rays", label: "Tampa Bay Rays"},
+    {value: "Texas Rangers", label: "Texas Rangers"},
+    {value: "Toronto Blue Jays", label: "Toronto Blue Jays"},
+    {value: "Washington Nationals", label: "Washington Nationals"}
 ];
 
 function populateForm() {
@@ -96,4 +96,63 @@ function createOptions(selectEl, options) {
     });
 }
 
+function parseDate(date) {
+    const dateValue = new Date(date);
+    const month = dateValue.getMonth() + 1;
+    const day = dateValue.getDate() + 1;
+    const year = dateValue.getFullYear().toString().substr(-2);
+
+    return `${month.toString()}/${day.toString()}/${year}`;
+}
+
+function parseForm() {
+    const outputText = document.getElementById('output-text');
+    const americanLeagueRadio = document.getElementById('american-league');
+    const nationalLeagueRadio = document.getElementById('national-league');
+    selectedLeague = ''
+    if (americanLeagueRadio.checked) {
+        selectedLeague = 'American League'
+    }
+    else if (nationalLeagueRadio.checked) {
+        selectedLeague = 'National League'
+    }
+    const dateValue = parseDate(document.getElementById("date").value)
+    outputText.textContent = `[font=TAHOMA]\n`;
+    outputText.textContent += `[b][u]${selectedLeague} Standings, Updated ${dateValue}[/b][/u]\n`;
+    divisions = ["East", "Central", "West", "Wildcard"]
+    for (var i = 0; i < divisions.length; i++) {
+        outputText.textContent += `${selectedLeague} ${divisions[i]}\n`;
+        for (var j = 0; j < 5; j++) {
+            if (document.getElementById(`${divisions[i].toLowerCase()}-team-${j+1}`).value == "St. Louis Cardinals") {
+                outputText.textContent += `[b]${j+1}. ${document.getElementById(`${divisions[i].toLowerCase()}-team-${j+1}`).value}, ${document.getElementById(`${divisions[i].toLowerCase()}-record-${j+1}`).value}, ${document.getElementById(`${divisions[i].toLowerCase()}-gb-${j+1}`).value} GB[/b]\n`
+            }
+            else {
+                outputText.textContent += `${j+1}. ${document.getElementById(`${divisions[i].toLowerCase()}-team-${j+1}`).value}, ${document.getElementById(`${divisions[i].toLowerCase()}-record-${j+1}`).value}, ${document.getElementById(`${divisions[i].toLowerCase()}-gb-${j+1}`).value} GB\n`
+            }
+            
+        }
+        outputText.textContent += `\n`;
+    }
+    statsCategories = ["Average", "Home Runs", "RBI", "Wins", "Saves", "ERA", "Strikeouts"];
+    outputText.textContent += `[b][u]${selectedLeague} Leaders, Updated ${dateValue}[/b][/u]\n`;
+    for (var i = 0; i < statsCategories.length; i++) {
+        outputText.textContent += `${statsCategories[i]}\n`;
+        for (var j = 0; j < 5; j++) {
+            if (document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-team-${j+1}`).value == "St. Louis Cardinals") {
+                outputText.textContent += `[b]${j+1}. ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-name-${j+1}`).value}, ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-team-${j+1}`).value} - ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-value-${j+1}`).value}[/b]\n`;
+            }
+            else {
+                outputText.textContent += `${j+1}. ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-name-${j+1}`).value}, ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-team-${j+1}`).value} - ${document.getElementById(`${statsCategories[i].toLowerCase().replace(/\s/g, "")}-value-${j+1}`).value}\n`;
+            }
+        }
+        outputText.textContent += '\n';
+    }
+
+
+}
+
 populateForm();
+const generateBtn = document.getElementById("generate-btn");
+generateBtn.addEventListener("click", () => {
+    parseForm();
+});
