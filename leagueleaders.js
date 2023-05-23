@@ -10,7 +10,7 @@ const teamOptions = [
     {value: "Colorado Rockies", label: "Colorado Rockies"},
     {value: "Detroit Tigers", label: "Detroit Tigers"},
     {value: "Houston Astros", label: "Houston Astros"},
-    {value: "Houston Astros", label: "Houston Astros"},
+    {value: "Kansas City Royals", label: "Kansas City Royals"},
     {value: "Los Angeles Angels", label: "Los Angeles Angels"},
     {value: "Los Angeles Dodgers", label: "Los Angeles Dodgers"},
     {value: "Miami Marlins", label: "Miami Marlins"},
@@ -150,7 +150,7 @@ function parseForm() {
 }
 
 function copyLayout() {
-    const updateBox = document.getElementById("output-text");
+    const updateBox = document.getElementById("output-text ");
     updateBox.select();
     document.execCommand("copy");
 }
