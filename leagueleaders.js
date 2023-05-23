@@ -147,12 +147,20 @@ function parseForm() {
         }
         outputText.textContent += '\n';
     }
+}
 
-
+function copyLayout() {
+    const updateBox = document.getElementById("output-text");
+    updateBox.select();
+    document.execCommand("copy");
 }
 
 populateForm();
 const generateBtn = document.getElementById("generate-btn");
 generateBtn.addEventListener("click", () => {
     parseForm();
+});
+const copyBtn = document.getElementById("copy-btn");
+copyBtn.addEventListener("click", () => {
+    copyLayout();
 });
