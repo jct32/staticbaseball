@@ -131,7 +131,7 @@ function generateLayout() {
     textBox.textContent += `[u][b]Cardinals Current Record[/b][/u]\n`;
     textBox.textContent += `${document.getElementById("team-record").value}\n\n`;
     textBox.textContent += `[u][b]Injury Report[/b][/u]\n`;
-    textBox.textContent += `${document.getElementById("injured-players").value}\n`;
+    textBox.textContent += `${document.getElementById("injured-players").value}\n\n`;
     textBox.textContent += `[u][b]Upcoming Schedule[/b][/u][size=85]\n`;
     for (let i = 0; i < 6; i++){
         const venue = document.getElementById(`venue-${i+1}`).value;
