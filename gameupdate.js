@@ -128,6 +128,21 @@ function generateLayout() {
     textBox.textContent += `${document.getElementById("home-stats").value}\n\n`;
     textBox.textContent += `--\n\n`;
     generateSimGames();
+    textBox.textContent += `[u][b]Cardinals Current Record[/b][/u]\n`;
+    textBox.textContent += `${document.getElementById("team-record").value}\n\n`;
+    textBox.textContent += `[u][b]Injury Report[/b][/u]\n`;
+    textBox.textContent += `${document.getElementById("injured-players").value}\n`;
+    textBox.textContent += `[u][b]Upcoming Schedule[/b][/u][size=85]\n`;
+    for (let i = 0; i < 6; i++){
+        const venue = document.getElementById(`venue-${i+1}`).value;
+        const opponent = findTeam(
+            teams,
+            document.getElementById(`next-game-team-${i+1}`).value
+        );
+        const record = document.getElementById(`next-game-record-${i+1}`).value;
+        textBox.textContent += `${venue} ${opponent.nickname} (${record})\n`;
+    }
+
 
 }
 
@@ -245,6 +260,52 @@ function gameLayouts () {
         const homeHR = document.createElement("input");
         homeHR.id = `home-hr-${i+1}`;
         form.appendChild(homeHR);
+    }
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement('hr'));
+    form.appendChild(document.createElement('br'));
+    const label = document.createElement('label');
+    label.textContent = 'Team Record: ';
+    input = document.createElement('input');
+    input.id = 'team-record';
+    form.appendChild(label);
+    form.appendChild(input);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(document.createElement('br'));
+    const injuredLabel = document.createElement('label');
+    injuredLabel.textContent = 'Injured Players: ';
+    form.appendChild(injuredLabel);
+    injuredbox = document.createElement('textarea');
+    injuredbox.id = 'injured-players';
+    injuredbox.rows = 5;
+    injuredbox.cols = 100;
+    form.appendChild(injuredbox);
+    form.appendChild(document.createElement('br'));
+    const nextGameHeader = document.createElement('h2');
+    nextGameHeader.textContent = 'Upcoming Games';
+    form.appendChild(nextGameHeader);
+    form.appendChild(document.createElement('br'));
+    for (let i = 0; i < 6; i ++) {
+        const venue = document.createElement('select');
+        venue.id = `venue-${i+1}`;
+        const home = document.createElement('option');
+        home.value = 'vs';
+        home.textContent = 'vs';
+        venue.appendChild(home);
+        const away = document.createElement('option');
+        away.value = 'at';
+        away.textContent = 'at';
+        venue.appendChild(away);
+        form.appendChild(venue);
+        const team = document.createElement('select');
+        createOptions(team, teamOptions);
+        team.id = `next-game-team-${i+1}`;
+        form.appendChild(team);
+        const input = document.createElement('input');
+        input.id = `next-game-record-${i+1}`;
+        input.placeholder = 'Record';
+        form.appendChild(input);
+        form.appendChild(document.createElement('br'));
     }
 }
 
